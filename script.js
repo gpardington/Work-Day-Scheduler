@@ -2,12 +2,14 @@
 var currentDay = $("#currentDay");
 var scheduleArea = $(".schedule");
 var timeBlock = $(".time-block");
-var currentDate = $('#currentDate').text(moment().format('LLLL'));
+//var currentDate = $('#currentDate').text(moment().format('LLLL'));
+var currentDate = moment().format("dddd, MMMM Do");
 var currentHour = moment().format("H");
 var toDoItems = [];
 
 //Array of objects
 function startSchedule() {
+
     timeBlock.each(function() {
     var thisRow = $(this);
     var thisRowHour = parseInt(thisRow.attr("data-hour"));
@@ -24,7 +26,7 @@ function startSchedule() {
 
 function saveItmes () {
     var hourUpdate = $(this).parent().attr("data-hour");
-    var addItem = $(this).parent().children("textarea").val();
+    var addItem = (($(this).parent()).children("textarea")).val();
     for (var i = 0; i < toDoItems.length; i++) {
         if (toDoItems[i].hour === hourUpdate){
             toDoItems[i].text = addItem;
@@ -57,11 +59,11 @@ function renderSchedule() {
     toDoItems = localStorage.getItem("todos");
     toDoItems = JSON.parse(toDoItems);
 
-    for (var i = 0; i < toDoItems.length; i++){
-        var itemHour = toDoItems[i].hour;
-        var itemText = toDoItems[i].text;
+    for (var j = 0; j < toDoItems.length; j++){
+        var itemHour = toDoItems[j].hour;
+        var itemText = toDoItems[j].text;
 
-        $("[data-hour" + itemHour + "]").children("textarea").val(itemText);
+        $("[data-hour=" + itemHour + "]").children("textarea").val(itemText);
     }
 }
 
