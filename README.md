@@ -4,4 +4,4 @@ A 9am-5pm to do list that allows you to save and clear items from your list. Als
 Here is a link to the working application: https://gpardington.github.io/Work-Day-Scheduler/
 
 Here is a screenshot of the application: 
-![ScreenShot](https://raw.github.com/gpardington/Work-Day-Scheduler/blob/master/screen-shot.png)
+![ScreenShot](https://raw.github.com/gpardington/Work-Day-Scheduler/master/Screen-Shot.png)
