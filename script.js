@@ -24,12 +24,12 @@ function startSchedule() {
     localStorage.setItem("todos", JSON.stringify(toDoItems));
 };
 
-function saveItmes () {
+function saveItems() {
     var hourUpdate = $(this).parent().attr("data-hour");
     var addItem = (($(this).parent()).children("textarea")).val();
-    for (var i = 0; i < toDoItems.length; i++) {
-        if (toDoItems[i].hour === hourUpdate){
-            toDoItems[i].text = addItem;
+    for (var j = 0; j < toDoItems.length; j++) {
+        if (toDoItems[j].hour == hourUpdate){
+            toDoItems[j].text = addItem;
         }
     }
     localStorage.setItem("todos", JSON.stringify(toDoItems));
@@ -42,14 +42,14 @@ function setRowColor() {
         var thisRow = $(this);
         var thisRowHour = parseInt(thisRow.attr("data-hour"));
         
-        if (thisRowHour === currentHour) {
+        if (thisRowHour == currentHour) {
             thisRow.addClass("present").removeClass("past future");
         }
         if (thisRowHour < currentHour) {
             thisRow.addClass("past").removeClass("present future");
         }
         if (thisRowHour > currentHour) {
-            thisRow.addClass("future").removeClass("present past");
+            thisRow.addClass("future").removeClass("past present");
         }
     });
 }
@@ -59,9 +59,9 @@ function renderSchedule() {
     toDoItems = localStorage.getItem("todos");
     toDoItems = JSON.parse(toDoItems);
 
-    for (var j = 0; j < toDoItems.length; j++){
-        var itemHour = toDoItems[j].hour;
-        var itemText = toDoItems[j].text;
+    for (var i = 0; i < toDoItems.length; i++){
+        var itemHour = toDoItems[i].hour;
+        var itemText = toDoItems[i].text;
 
         $("[data-hour=" + itemHour + "]").children("textarea").val(itemText);
     }
@@ -81,5 +81,5 @@ $(document).ready(function() {
     renderSchedule();
 
     //Whenever something is typed in the time block field and the save icon is clicked, save it to localStorage
-    scheduleArea.on("click", "button", saveItmes);
+    scheduleArea.on("click", "button", saveItems);
 });
