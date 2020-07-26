@@ -49,6 +49,35 @@ function setRowColor() {
         if (thisRowHour > currentHour) {
             thisRow.addClass("future").removeClass("present past");
         }
-        
-    })
+    });
 }
+
+//Render data
+function renderSchedule() {
+    toDoItems = localStorage.getItem("todos");
+    toDoItems = JSON.parse(toDoItems);
+
+    for (var i = 0; i < toDoItems.length; i++){
+        var itemHour = toDoItems[i].hour;
+        var itemText = toDoItems[i].text;
+
+        $("[data-hour" + itemHour + "]").children("textarea").val(itemText);
+    }
+}
+
+//Start the array of objects. Otherwise, don't run the function since it will come from localStorage
+$(document).ready(function() {
+    setRowColor();
+
+    if(!localStorage.getItem("todos")) {
+        startSchedule();
+    }
+
+    //display the current date
+    currentDay.text(currentDate);
+
+    renderSchedule();
+
+    //Whenever something is typed in the time block field and the save icon is clicked, save it to localStorage
+    scheduleArea.on("click", "button", saveItmes);
+});
